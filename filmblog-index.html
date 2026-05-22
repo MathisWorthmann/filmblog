@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filmtagebuch – Mathis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0c0a0e;
+  --bg-card: #141218;
+  --bg-card-hover: #1c1a22;
+  --text: #e8e4ec;
+  --text-muted: #9a94a4;
+  --accent: #e8b44d;
+  --accent-dim: #c4963f;
+  --border: #2a2630;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Source Sans 3', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(12, 10, 14, 0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+nav .logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+nav .nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+nav .nav-links a:hover { color: var(--accent); }
+
+nav .nav-links .portfolio-link {
+  color: var(--accent-dim);
+  border: 1px solid var(--accent-dim);
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+nav .nav-links .portfolio-link:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* ── PAGES ── */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10rem 3rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(232, 180, 77, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.7;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin: 2rem auto 0;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+/* ── REVIEWS SECTION ── */
+.reviews {
+  padding: 4rem 3rem 8rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3rem;
+}
+
+.reviews-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.reviews-count {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.review-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.8rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+  text-decoration: none;
+  color: inherit;
+}
+
+.review-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(232, 180, 77, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.review-poster {
+  width: 180px;
+  height: 260px;
+  background: #1c1a22;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.review-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.review-meta {
+  font-size: 0.75rem;
+  color: var(--accent-dim);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.review-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.review-info .film-year {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.review-info .review-excerpt {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-arrow {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-dim);
+  transition: color 0.3s;
+}
+
+.review-card:hover .review-arrow { color: var(--accent); }
+
+/* ── SINGLE REVIEW PAGE ── */
+.review-hero {
+  padding: 10rem 3rem 3rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.review-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.review-back:hover { color: var(--accent); }
+
+.review-hero .review-meta {
+  font-size: 0.75rem;
+  color: var(--accent-dim);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.review-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.review-hero .film-details {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-hero .film-details span {
+  color: var(--accent-dim);
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.review-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 3rem 6rem;
+}
+
+.review-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.review-content h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 3px;
+  height: 1em;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.review-content p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.review-content .pullquote {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  border-radius: 0 4px 4px 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.review-content .spoiler-warning {
+  background: rgba(232, 180, 77, 0.08);
+  border: 1px solid rgba(232, 180, 77, 0.2);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  margin: 2rem 0;
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem 3rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+footer a {
+  color: var(--accent-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover { color: var(--accent); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  nav .nav-links { gap: 1rem; }
+  nav .nav-links a { font-size: 0.75rem; }
+  .hero { padding: 8rem 1.5rem 3rem; }
+  .reviews { padding: 3rem 1.5rem 6rem; }
+  .review-card { grid-template-columns: 120px 1fr; gap: 1.2rem; padding: 1.2rem; }
+  .review-poster { width: 120px; height: 175px; }
+  .review-info h3 { font-size: 1.1rem; }
+  .review-hero, .review-content { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .review-hero h1 { font-size: clamp(1.6rem, 8vw, 3.2rem); overflow-wrap: break-word; }
+}
+
+@media (max-width: 480px) {
+  .review-card { grid-template-columns: 1fr; }
+  .review-poster { width: 100%; height: 200px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <a href="#" class="logo" onclick="showPage('home')">Filmtagebuch</a>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')">Reviews</a>
+    <a href="https://mathisworthmann.github.io/" target="_blank" class="portfolio-link">← Portfolio</a>
+  </div>
+</nav>
+
+<!-- ═════════════════════════════════
+     HOME / BLOG OVERVIEW
+     ═════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <section class="hero">
+    <div class="hero-icon">🎬</div>
+    <h1>Film<span>tagebuch</span></h1>
+    <p class="hero-sub">
+      Monatliche Filmanalysen aus der Perspektive eines Game Designers. 
+      Storytelling, Pacing, Dramaturgie – was Filme und Spiele verbindet.
+    </p>
+    <div class="hero-divider"></div>
+  </section>
+
+  <section class="reviews">
+    <div class="reviews-header">
+      <h2>Alle Reviews</h2>
+      <span class="reviews-count">1 Review</span>
+    </div>
+
+    <!-- Review Card 1 -->
+    <a class="review-card" onclick="showPage('review-man-from-earth')">
+      <div class="review-poster">Poster einfügen</div>
+      <div class="review-info">
+        <p class="review-meta">Review #1 · Juni 2026</p>
+        <h3>The Man from Earth</h3>
+        <p class="film-year">2007 · Regie: Richard Schenkman</p>
+        <p class="review-excerpt">
+          Ein Film, der beweist, dass man weder Budget noch Spezialeffekte braucht, um den Zuschauer zwei Stunden lang in Atem zu halten. Alles, was es braucht, ist eine einzige Frage – und den Mut, sie ernst zu nehmen.
+        </p>
+        <div class="review-arrow">Weiterlesen →</div>
+      </div>
+    </a>
+
+    <!-- Platzhalter für zukünftige Reviews -->
+    <!--
+    <a class="review-card" onclick="showPage('review-xyz')">
+      <div class="review-poster">Poster einfügen</div>
+      <div class="review-info">
+        <p class="review-meta">Review #2 · Juli 2026</p>
+        <h3>[Filmtitel]</h3>
+        <p class="film-year">[Jahr] · Regie: [Name]</p>
+        <p class="review-excerpt">[Teaser-Text]</p>
+        <div class="review-arrow">Weiterlesen →</div>
+      </div>
+    </a>
+    -->
+
+  </section>
+
+  <footer>
+    <span>© 2026 Mathis Worthmann</span>
+    <a href="https://mathisworthmann.github.io/" target="_blank">Portfolio →</a>
+  </footer>
+
+</div>
+
+<!-- ═════════════════════════════════
+     REVIEW: THE MAN FROM EARTH
+     ═════════════════════════════════ -->
+<div id="page-review-man-from-earth" class="page">
+
+  <section class="review-hero">
+    <a class="review-back" onclick="showPage('home')">← Zurück zur Übersicht</a>
+    <p class="review-meta">Review #1 · Juni 2026</p>
+    <h1>The Man from Earth</h1>
+    <p class="film-details">
+      2007 · Regie: <span>Richard Schenkman</span> · Drehbuch: <span>Jerome Bixby</span>
+    </p>
+    <p class="film-details">
+      Genre: <span>Science-Fiction / Drama</span> · Laufzeit: <span>87 Minuten</span>
+    </p>
+    <div class="review-rating">
+      ★★★★★ <span style="font-size:0.85rem; color:var(--text-muted);">/ Meisterwerk</span>
+    </div>
+  </section>
+
+  <div class="review-content">
+
+    <h2>Worum es geht</h2>
+    <p>
+      [Hier beschreibst du die Prämisse des Films in 2–3 Sätzen, ohne zu viel zu verraten. Was ist der Ausgangspunkt? Was macht den Film besonders?]
+    </p>
+
+    <h2>Was den Film besonders macht</h2>
+    <p>
+      [Hier analysierst du, was den Film für dich heraushebt. Warum ist er dein Lieblingsfilm? Was macht er anders als andere Filme? Welche erzählerische oder strukturelle Entscheidung beeindruckt dich am meisten?]
+    </p>
+
+    <div class="pullquote">
+      [Ein besonders treffendes Zitat aus deiner Analyse oder ein Gedanke, der den Kern deiner Review einfängt.]
+    </div>
+
+    <h2>Storytelling und Dramaturgie</h2>
+    <p>
+      [Hier gehst du tiefer in die Struktur: Wie baut der Film Spannung auf? Wie funktioniert das Pacing? Was können Spieledesigner daraus lernen? Das ist dein Alleinstellungsmerkmal – die Game-Designer-Perspektive.]
+    </p>
+
+    <div class="spoiler-warning">
+      ⚠ Ab hier Spoiler – nur weiterlesen, wenn du den Film gesehen hast.
+    </div>
+
+    <h2>Spoiler-Analyse</h2>
+    <p>
+      [Hier kannst du frei über konkrete Plot-Punkte, das Ende und Details sprechen, die den Film erst im Rückblick verständlich machen.]
+    </p>
+
+    <h2>Fazit</h2>
+    <p>
+      [Dein abschließendes Urteil. Für wen ist der Film? Was bleibt hängen? Warum sollte man ihn sehen?]
+    </p>
+
+  </div>
+
+  <footer>
+    <span>© 2026 Mathis Worthmann</span>
+    <a href="https://mathisworthmann.github.io/" target="_blank">Portfolio →</a>
+  </footer>
+
+</div>
+
+<!-- ═══ PAGE ROUTING ═══ -->
+<script>
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
