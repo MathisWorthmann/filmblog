@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Filmtagebuch von Mathis Worthmann. Monatliche Filmreviews und Analysen eines leidenschaftlichen Filmliebhabers.">
 <meta name="author" content="Mathis Worthmann">
+  <meta property="og:title" content="Filmtagebuch – Mathis Worthmann">
+<meta property="og:description" content="Filmreviews und Analysen eines leidenschaftlichen Filmliebhabers.">
+<meta property="og:image" content="https://mathisworthmann.github.io/filmblog/images/ManFromEarth_Cover.webp">
+<meta property="og:url" content="https://mathisworthmann.github.io/filmblog/">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="images/favicon.png">
 <title>Filmtagebuch – Mathis</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -515,9 +521,9 @@ footer a:hover { color: var(--accent); }
 
 <!-- ═══ NAVIGATION ═══ -->
 <nav>
-  <a href="#" class="logo" onclick="showPage('home')">Filmtagebuch</a>
+  <span class="logo" onclick="showPage('home')" style="cursor:pointer;">Filmtagebuch</span>
   <div class="nav-links">
-    <a href="#" onclick="showPage('home')">Reviews</a>
+    <span onclick="showPage('home')" style="cursor:pointer;color:var(--text-muted);font-size:0.85rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;">Reviews</span>
     <a href="https://mathisworthmann.github.io/" target="_blank" class="portfolio-link">← Portfolio</a>
   </div>
 </nav>
