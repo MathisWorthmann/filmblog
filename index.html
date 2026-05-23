@@ -521,9 +521,9 @@ footer a:hover { color: var(--accent); }
 
 <!-- ═══ NAVIGATION ═══ -->
 <nav>
-  <span class="logo" onclick="('home')" style="cursor:pointer;">Filmtagebuch</span>
+  <span class="logo" onclick="showPage('home')" style="cursor:pointer;">Filmtagebuch</span>
   <div class="nav-links">
-    <span onclick="('home')" style="cursor:pointer;color:var(--text-muted);font-size:0.85rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;">Reviews</span>
+    <span onclick="showPage('home')" style="cursor:pointer;color:var(--text-muted);font-size:0.85rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;">Reviews</span>
     <a href="https://mathisworthmann.github.io/" target="_blank" class="portfolio-link">← Portfolio</a>
   </div>
 </nav>
@@ -549,7 +549,7 @@ footer a:hover { color: var(--accent); }
     </div>
 
     <!-- Review Card 1 -->
-    <a class="review-card" onclick="('review-man-from-earth')">
+    <a class="review-card" onclick="showPage('review-man-from-earth')">
       <div class="review-poster">
         <img src="images/ManFromEarth_Cover.webp" alt="The Man from Earth Poster">
       </div>
@@ -566,7 +566,7 @@ footer a:hover { color: var(--accent); }
 
     <!-- Platzhalter für zukünftige Reviews -->
     <!--
-    <a class="review-card" onclick="('review-xyz')">
+   <a class="review-card" onclick="showPage('review-xyz')">
       <div class="review-poster">Poster einfügen</div>
       <div class="review-info">
         <p class="review-meta">Review #2 · Juli 2026</p>
@@ -593,7 +593,7 @@ footer a:hover { color: var(--accent); }
 <div id="page-review-man-from-earth" class="page">
 
   <section class="review-hero">
-    <a class="review-back" onclick="('home')">← Zurück zur Übersicht</a>
+    <a class="review-back" onclick="showPage('home')">← Zurück zur Übersicht</a>
     <p class="review-meta">Review #1 · Juni 2026</p>
     <h1>The Man from Earth</h1>
     <p class="film-details">
