@@ -1,4 +1,50 @@
 /* ══════════════════════════════════════
+   FILMTAGEBUCH – Selbst gehostete Schriften
+   Playfair Display & Source Sans 3 (SIL OFL)
+   ══════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url('fonts/playfair-display-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal; font-weight: 600; font-display: swap;
+  src: url('fonts/playfair-display-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url('fonts/playfair-display-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal; font-weight: 800; font-display: swap;
+  src: url('fonts/playfair-display-latin-800-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic; font-weight: 400; font-display: swap;
+  src: url('fonts/playfair-display-latin-400-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal; font-weight: 300; font-display: swap;
+  src: url('fonts/source-sans-3-latin-300-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url('fonts/source-sans-3-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal; font-weight: 600; font-display: swap;
+  src: url('fonts/source-sans-3-latin-600-normal.woff2') format('woff2');
+}
+
+/* ══════════════════════════════════════
    FILMTAGEBUCH – Shared Styles
    ══════════════════════════════════════ */
 
@@ -298,3 +344,44 @@ footer a:hover { color: var(--accent); }
   .review-card { grid-template-columns: 1fr; }
   .review-poster { width: 100%; height: 200px; }
 }
+
+/* ── WEITERE REVIEWS ── */
+.more-reviews { margin-top: 3rem; }
+.more-reviews h2 {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+  margin-bottom: 1.2rem; position: relative; padding-left: 1.2rem;
+}
+.more-reviews h2::before {
+  content: ''; position: absolute; left: 0; top: 0.25em;
+  width: 3px; height: 1em; background: var(--accent); border-radius: 2px;
+}
+.more-reviews-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.more-review-card {
+  display: flex; gap: 1rem; align-items: center;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 1rem; text-decoration: none; color: inherit;
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+}
+.more-review-card:hover {
+  background: var(--bg-card-hover); border-color: rgba(232, 180, 77, 0.3);
+  transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.more-review-card img {
+  width: 60px; height: 88px; object-fit: cover; border-radius: 4px;
+  border: 1px solid var(--border); flex-shrink: 0;
+}
+.more-review-text h3 {
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; line-height: 1.2;
+}
+.more-review-text .film-year { color: var(--text-muted); font-size: 0.8rem; }
+@media (max-width: 600px) { .more-reviews-grid { grid-template-columns: 1fr; } }
+
+/* ── FOKUS (Tastaturnavigation) ── */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── FOOTER LINKS ── */
+.footer-links { display: flex; gap: 1.5rem; align-items: baseline; }
