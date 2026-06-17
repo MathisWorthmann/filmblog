@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://filmblog.mathisworthmann.de/sitemap.xml

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A static German-language film review blog ("Filmtagebuch") by Mathis Worthmann. No build tools, no package manager, no JavaScript — plain HTML and CSS deployed to GitHub Pages at https://mathisworthmann.github.io/filmblog/.
+A static German-language film review blog ("Filmtagebuch") by Mathis Worthmann. No build tools, no package manager, no JavaScript — plain HTML and CSS deployed to GitHub Pages at https://filmblog.mathisworthmann.de/.
 
 The blog focuses on in-depth, analytical reviews of niche films — especially Kammerspiele, hard sci-fi, and found footage — not simple star ratings. Mathis attends Fantasy Filmfest and logs films on Letterboxd (handle: XerxesIV).
 
@@ -56,8 +56,9 @@ Pure static site: one `.html` file per page, one `style.css` for all styling.
 - `images/` — WebP for covers/photos, SVG for infographics, PNG for favicon
 
 **SEO files:**
-- `sitemap.xml` — lives in this repo at `/filmblog/sitemap.xml`. **Not auto-generated** (no build step); must be updated by hand per new post.
-- `robots.txt` — must live at the **domain root** (`mathisworthmann.github.io/robots.txt`), i.e. in the user-site repo, NOT in `/filmblog/`. It references the sitemap.
+- `sitemap.xml` — lives in this repo at the root (`sitemap.xml`). **Not auto-generated** (no build step); must be updated by hand per new post.
+- `robots.txt` — lives in this repo at the root (`robots.txt`); served at `filmblog.mathisworthmann.de/robots.txt`. It references the sitemap.
+- `CNAME` — tells GitHub Pages to serve this repo under `filmblog.mathisworthmann.de`.
 
 ## CSS Design System
 
