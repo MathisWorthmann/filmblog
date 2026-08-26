@@ -88,7 +88,7 @@ Each review page follows a fixed template order:
 
 **Two different "related" sections — do not confuse them:**
 - **"Ähnliche Filme"** links OUTWARD to three other films on Letterboxd (external recommendations).
-- **"Weitere Reviews"** links INTERNALLY to Mathis's own other review pages (small cards, thumbnail + title).
+- **"Weitere Reviews"** links INTERNALLY to Mathis's own other review pages (small cards, thumbnail + title). **Always exactly 3 cards**, showing the **3 reviews that came before this one**, descending (on Review #5: #4, #3, #2). If fewer than 3 predecessors exist, top the list up with the newest reviews that came *after*, appended at the end (on #3: #2, #1, #5; on #2: #1, #5, #4; on #1: #5, #4, #3). The cards are stacked in a single column (`.more-reviews-grid` is `grid-template-columns: 1fr`), not side by side.
 
 All review pages include Schema.org JSON-LD `Review` data, a `<link rel="canonical">`, and full OpenGraph + Twitter Card meta tags.
 
@@ -96,10 +96,10 @@ All review pages include Schema.org JSON-LD `Review` data, a `<link rel="canonic
 
 1. Copy an existing review page (e.g. `back-to-the-future.html`) as a template.
 2. Write the review in the German voice described above.
-3. Add the poster as a WebP to `images/` (use the `_Cover.webp` naming used elsewhere).
+3. Add the poster as a WebP to `images/`. Image files are named `<FilmInPascalCase>_<Motiv>.webp` — `Strafpark_Cover.webp`, `BackToTheFuture_DeLorean.webp`, `Flipped_Eggs.webp`. The prefix follows the film, not the page slug (the German-titled *Verliebt und ausgeflippt* uses `Flipped_*`), and every review needs a `_Cover.webp`.
 4. Update the `<head>`: `<title>`, `meta description`, canonical, OG and Twitter tags, and the **JSON-LD block** (film name, director, year, rating).
 5. Add a review card to `index.html`. **The reading time on the index card must match the detail page** (this once drifted — BttF said 15 min on the card, 12 in the page).
-6. Add a "Weitere Reviews" card for the new film on the other review pages, and update their cards if numbering shifts.
+6. Rebuild the "Weitere Reviews" block on **every** review page per the rule above. Adding a review changes the top-up cards on the earliest pages (#1–#3), so re-check all of them, not just the neighbours.
 7. Add a `<url>` entry (with `<lastmod>`) for the new page to `sitemap.xml`.
 8. Use `loading="lazy" decoding="async"` on all `<img>` tags except the first hero/cover image.
 

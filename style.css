@@ -355,7 +355,7 @@ footer a:hover { color: var(--accent); }
   content: ''; position: absolute; left: 0; top: 0.25em;
   width: 3px; height: 1em; background: var(--accent); border-radius: 2px;
 }
-.more-reviews-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.more-reviews-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 .more-review-card {
   display: flex; gap: 1rem; align-items: center;
   background: var(--bg-card); border: 1px solid var(--border);
@@ -374,7 +374,6 @@ footer a:hover { color: var(--accent); }
   font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; line-height: 1.2;
 }
 .more-review-text .film-year { color: var(--text-muted); font-size: 0.8rem; }
-@media (max-width: 600px) { .more-reviews-grid { grid-template-columns: 1fr; } }
 
 /* ── FOKUS (Tastaturnavigation) ── */
 a:focus-visible, button:focus-visible {
