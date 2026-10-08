@@ -147,7 +147,7 @@ nav .nav-links .portfolio-link:hover {
   pointer-events: none;
 }
 
-.hero-icon { font-size: 2.5rem; margin-bottom: 1.5rem; animation: fadeInUp 0.8s ease-out both; }
+.hero-icon { margin-bottom: 1.5rem; }
 
 .hero h1 {
   font-family: var(--font-display);
@@ -156,7 +156,6 @@ nav .nav-links .portfolio-link:hover {
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
-  animation: fadeInUp 0.8s ease-out 0.1s both;
 }
 
 .hero h1 span { color: var(--accent); }
@@ -166,14 +165,31 @@ nav .nav-links .portfolio-link:hover {
   color: var(--text-muted);
   max-width: 520px;
   line-height: 1.7;
-  animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 .hero-divider {
   width: 60px; height: 1px;
   background: var(--accent);
   margin: 2rem auto 0;
-  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+/* ── FILMKLAPPE (wiederverwendbar, Inline-SVG mit viewBox 0 0 64 52) ── */
+.klappe { display: block; width: 76px; height: 62px; overflow: visible; }
+.klappe-tafel { fill: var(--bg-card); stroke: var(--accent-dim); stroke-width: 1.5; }
+.klappe-balken-flaeche { fill: var(--bg); stroke: var(--accent-dim); stroke-width: 1.5; }
+.klappe-streifen { fill: var(--accent); }
+.klappe-linie { fill: none; stroke: var(--border); stroke-width: 1.5; }
+.klappe-scharnier { fill: var(--accent); }
+/* Scharnier am linken unteren Ende des Balkens */
+.klappe-balken { transform-box: fill-box; transform-origin: 0 100%; }
+
+/* ── STARTSEITEN-INTRO (Klasse .intro-klappe steht fest auf <html> in index.html; läuft bei jedem Aufruf) ── */
+@media (prefers-reduced-motion: no-preference) {
+  .intro-klappe .klappe { animation: klappe-ruck 500ms linear both; }
+  .intro-klappe .klappe-balken { animation: klappe-schlag 500ms both; }
+  .intro-klappe .hero h1 { animation: fadeInUp 0.5s ease-out 0.4s both; }
+  .intro-klappe .hero-sub { animation: fadeInUp 0.5s ease-out 0.5s both; }
+  .intro-klappe .hero-divider { animation: fadeInUp 0.5s ease-out 0.6s both; }
 }
 
 /* ── REVIEWS SECTION ── */
@@ -324,6 +340,53 @@ footer a:hover { color: var(--accent); }
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Balken: holt weich aus (0–250 ms), schlägt beschleunigend zu (–400 ms), federt einmal nach (–500 ms) */
+@keyframes klappe-schlag {
+  0%   { transform: rotate(-25deg); animation-timing-function: cubic-bezier(0.25, 0.6, 0.45, 1); }
+  50%  { transform: rotate(-32deg); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  80%  { transform: rotate(0deg);   animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1); }
+  88%  { transform: rotate(-3deg);  animation-timing-function: cubic-bezier(0.6, 0, 0.8, 1); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Ganze Klappe: kurz einblenden, beim Aufprall (400 ms) minimal nach unten rucken */
+@keyframes klappe-ruck {
+  0%   { opacity: 0; transform: translateY(0); }
+  12%  { opacity: 1; }
+  80%  { transform: translateY(0); }
+  84%  { transform: translateY(2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SEITENÜBERGANG (Cross-Document View Transitions, greift auf jeder Seite mit style.css) ──
+   Neue Seite wischt von oben über die alte; in der 14px-Lücke zwischen beiden Snapshots
+   scheint der Streifen-Hintergrund des Image-Pairs durch – die Kante im Klappen-Muster. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+
+  ::view-transition-image-pair(root) {
+    background: repeating-linear-gradient(-45deg, var(--accent) 0 6px, var(--bg) 6px 12px);
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+    animation-fill-mode: both;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) { animation-name: wisch-alt; }
+  ::view-transition-new(root) { animation-name: wisch-neu; }
+}
+
+@keyframes wisch-neu {
+  from { clip-path: inset(0 0 calc(100% + 14px) 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+@keyframes wisch-alt {
+  from { clip-path: inset(0 0 0 0); }
+  to   { clip-path: inset(calc(100% + 14px) 0 0 0); }
 }
 
 /* ── RESPONSIVE ── */

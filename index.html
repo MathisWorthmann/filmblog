@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="intro-klappe">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,16 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-icon">🎬</div>
+  <svg class="klappe hero-icon" viewBox="0 0 64 52" width="76" height="62" aria-hidden="true" focusable="false">
+    <rect class="klappe-tafel" x="4" y="18" width="56" height="32" rx="2"/>
+    <path class="klappe-streifen" d="M8 18h6l6 9h-6zM20 18h6l6 9h-6zM32 18h6l6 9h-6zM44 18h6l6 9h-6z"/>
+    <path class="klappe-linie" d="M4 27h56M10 36h44M10 43h44"/>
+    <g class="klappe-balken">
+      <rect class="klappe-balken-flaeche" x="4" y="8" width="56" height="9" rx="1"/>
+      <path class="klappe-streifen" d="M8 17h6l6-9h-6zM20 17h6l6-9h-6zM32 17h6l6-9h-6zM44 17h6l6-9h-6z"/>
+    </g>
+    <circle class="klappe-scharnier" cx="6" cy="17.5" r="1.8"/>
+  </svg>
   <h1>Film<span>tagebuch</span></h1>
   <p class="hero-sub">
     Filmanalysen eines leidenschaftlichen Filmliebhabers. Ehrliche Gedanken zu Storytelling, Inszenierung und den Filmen, die mich bewegen.

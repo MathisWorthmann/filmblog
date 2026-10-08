@@ -120,6 +120,12 @@ All review pages include Schema.org JSON-LD `Review` data, a `<link rel="canonic
 - These are **non-lawyer drafts** flagged for review (eRecht24 / IHK / a lawyer).
 - If analytics, a contact form, comments, or any third-party script is ever added, the Datenschutzerklärung MUST be extended accordingly. Self-hosting the fonts was a deliberate privacy choice — keep it that way.
 
+## Animations (Intro & Seitenübergang)
+
+- **Filmklappen-Intro (Startseite):** Inline-SVG `.klappe` im Hero von `index.html`. Die Klasse `intro-klappe` steht fest auf `<html>` in `index.html`, das Intro läuft also bei jedem Aufruf der Startseite – bewusst ohne JS und ohne `sessionStorage`, damit nichts auf dem Endgerät gespeichert wird und die Datenschutzerklärung („keine Cookies, kein Tracking“) unverändert stimmt. Bei `prefers-reduced-motion: reduce` läuft es nicht (CSS-Media-Query). Ohne die Klasse ist alles statisch sichtbar. CSS: Abschnitte „FILMKLAPPE“ und „STARTSEITEN-INTRO“ plus Keyframes `klappe-schlag` / `klappe-ruck` in `style.css`. Die `.klappe*`-Klassen sind seitenneutral und für spätere Wiederverwendung (z. B. Review-Seiten) gedacht; das SVG nutzt keine IDs, darf also mehrfach pro Seite vorkommen.
+- **Seitenübergang:** Cross-Document View Transitions (`@view-transition`) im Abschnitt „SEITENÜBERGANG“ in `style.css`: Wisch von oben, Kante im Klappen-Streifenmuster, nur bei `prefers-reduced-motion: no-preference`. Greift nur auf Seiten, die `style.css` einbinden — **jede neue Seite muss `style.css` einbinden**, sonst fehlt dort der Übergang. Browser ohne Unterstützung navigieren normal.
+- Zum Testen einen lokalen Server nutzen (nicht `file://`), da View Transitions nur same-origin über HTTP greifen.
+
 ## Footer & Nav Consistency
 
 Nav and footer are duplicated across every page (no includes/build step). A change to either must be replicated to ALL pages.
@@ -127,6 +133,8 @@ Nav and footer are duplicated across every page (no includes/build step). A chan
 - **Footer links:** Impressum · Datenschutz · Portfolio →
 
 ## Outstanding TODOs
+
+- Seitenübergang fällt in Chrome gelegentlich aus (Zielseite meldet `ViewTransition opt-in disabled`, ca. 1 von 10 Klicks). Ursache ungeklärt; Media-Query, Inline-Script und gestückeltes HTML sind als Ursache ausgeschlossen. Verdacht (ungeprüft): Content-Scripts von Browser-Erweiterungen. Folge ist nur ein normaler Seitenwechsel ohne Wisch.
 
 - Submit the site + sitemap to Google Search Console (and Bing Webmaster Tools).
 - Add intrinsic `width`/`height` to `<img>` tags (real pixel dimensions needed) to reduce layout shift.
